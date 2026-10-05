@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Correcteur Nicaise 🇧🇯</title>
+<style>body{font-family:Arial;padding:20px;max-width:600px;margin:auto}input{width:100%;padding:12px;font-size:18px}#result{margin-top:20px;font-size:20px}</style>
+</head>
+<body>
+<h1>Correcteur Nicaise 🇧🇯</h1>
+<input id="q" placeholder="Tape: Bénin, France...">
+<div id="result"></div>
+<script type="module" src="app.js"></script>
+<script>
+document.getElementById('q').addEventListener('input', e=>{
+  if(window.avecDrapeau){
+    document.getElementById('result').innerText = window.avecDrapeau(e.target.value);
+  }
+})
+</script>
+</body>
+</html>
