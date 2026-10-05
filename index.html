@@ -2,21 +2,18 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Correcteur Nicaise 🇧🇯</title>
-<style>body{font-family:Arial;padding:20px;max-width:600px;margin:auto}input{width:100%;padding:12px;font-size:18px}#result{margin-top:20px;font-size:20px}</style>
+<style>
+body{font-family:system-ui;padding:20px;max-width:600px;margin:auto;background:#f8f9fa}
+input{width:100%;padding:15px;font-size:18px;border:2px solid #ddd;border-radius:10px;box-sizing:border-box}
+#result{margin-top:20px;font-size:22px;font-weight:bold;min-height:30px}
+</style>
 </head>
 <body>
 <h1>Correcteur Nicaise 🇧🇯</h1>
-<input id="q" placeholder="Tape: Bénin, France...">
-<div id="result"></div>
-<script type="module" src="app.js"></script>
-<script>
-document.getElementById('q').addEventListener('input', e=>{
-  if(window.avecDrapeau){
-    document.getElementById('result').innerText = window.avecDrapeau(e.target.value);
-  }
-})
-</script>
+<input id="q" placeholder="Tape un pays: Bénin, France...">
+<div id="result">🇧🇯 Prêt!</div>
+<script type="module" src="./app.js"></script>
 </body>
 </html>
