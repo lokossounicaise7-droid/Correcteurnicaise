@@ -1,31 +1,33 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+const form = document.getElementById('diagnosticForm');
+const btn = document.getElementById('btnDiagnostic');
+const errorBox = document.getElementById('errorBox');
 
-const supabase = createClient(
-  "https://sxlykmtiludokhwxrfjr.supabase.co",
-  "sb_publishable_HtgXQulIbU8yeIYc32ryyw_zDEDuAzj"
-);
-
-const DRAPEAUX = {
-  "bénin": "🇧🇯", "benin": "🇧🇯",
-  "france": "🇫🇷", "togo": "🇹🇬",
-  "côte d'ivoire": "🇨🇮", "sénégal": "🇸🇳"
+const matieres = {
+  "Mathématiques": ["Algèbre", "Géométrie", "Calcul"],
+  "Comptabilité": ["Journal", "Bilan", "TVA"],
+  "Anglais": ["Grammar", "Vocabulary", "Conjugation"],
+  "Informatique": ["Algorithm", "Bureautique", "Programmation"],
+  "Français": ["Grammaire", "Conjugaison", "Orthographe"],
+  "Physique-Chimie": ["Physique", "Chimie", "Formules"],
+  "Économie": ["Micro", "Macro", "Gestion"]
 };
 
-function corrigeAvecDrapeau(texte){
-  if(!texte) return "🇧🇯 Prêt!";
-  let lower = texte.toLowerCase();
-  for(let mot in DRAPEAUX){
-    if(lower.includes(mot) &&!texte.includes(DRAPEAUX[mot])){
-      return `${DRAPEAUX[mot]} ${texte}`;
-    }
-  }
-  return texte;
-}
+btn.addEventListener('click', () => {
+  const matiere = document.getElementById('matiereInput').value || "Comptabilité";
+  const niveau = document.getElementById('niveauInput').value;
+  const objectif = document.getElementById('objectifInput').value;
 
-const input = document.getElementById('q');
-const result = document.getElementById('result');
-if(input && result){
-  input.addEventListener('input', (e)=>{
-    result.textContent = corrigeAvecDrapeau(e.target.value);
-  });
-}
+  if(!objectif){
+    errorBox.style.display="block";
+    errorBox.innerText="Écris ton objectif d'abord 🙂";
+    return;
+  }
+  errorBox.style.display="none";
+  btn.innerText="Analyse en cours...";
+
+  setTimeout(()=>{
+    const sous = matieres[matiere] || matieres["Comptabilité"];
+    localStorage.setItem('nicaise_diagnostic', JSON.stringify({matiere, niveau, objectif, sous}));
+    window.location.href="diagnostic.html";
+  }, 800);
+});
